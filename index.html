@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>琉セメクイズ - 沖縄の街をつくろう</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  background: #0f172a;
+  color: #fff;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* ===== Screens ===== */
+.screen { display: none; flex-direction: column; height: 100dvh; padding: 16px; }
+.screen.active { display: flex; }
+
+/* ===== Start Screen ===== */
+#startScreen {
+  justify-content: center; align-items: center; gap: 24px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+  text-align: center;
+}
+#startScreen h1 { font-size: 28px; line-height: 1.3; }
+#startScreen h1 span { color: #38bdf8; }
+#startScreen .subtitle { color: #94a3b8; font-size: 14px; margin-top: -12px; }
+.name-input {
+  width: 240px; padding: 14px 16px; border-radius: 12px;
+  border: 2px solid #334155; background: #1e293b; color: #fff;
+  font-size: 18px; text-align: center; outline: none;
+  transition: border-color 0.2s;
+}
+.name-input:focus { border-color: #38bdf8; }
+.name-input::placeholder { color: #64748b; }
+.btn-start {
+  width: 240px; padding: 16px; border: none; border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #fff; font-size: 18px; font-weight: 700;
+  cursor: pointer; transition: transform 0.1s, opacity 0.2s;
+}
+.btn-start:active { transform: scale(0.96); }
+.btn-start:disabled { opacity: 0.4; }
+
+/* ===== City View (shared) ===== */
+.city-container {
+  position: relative; width: 100%; height: 140px; min-height: 120px;
+  background: linear-gradient(180deg, #1e3a5f 0%, #2d5a8e 60%, #3b7a4a 92%, #4a8c5c 100%);
+  border-radius: 12px; overflow: hidden; flex-shrink: 0;
+}
+.city-ground {
+  position: absolute; bottom: 0; width: 100%; height: 22px;
+  background: linear-gradient(180deg, #4a8c5c, #3d7a4a);
+}
+.city-road {
+  position: absolute; bottom: 10px; width: 100%; height: 6px;
+  background: #555; opacity: 0;
+  transition: opacity 0.5s;
+}
+.city-road.visible { opacity: 1; }
+.city-road::after {
+  content: ''; position: absolute; top: 2px; left: 0; width: 100%; height: 2px;
+  background: repeating-linear-gradient(90deg, #fff 0, #fff 12px, transparent 12px, transparent 24px);
+}
+
+/* Buildings */
+.building {
+  position: absolute; bottom: 22px;
+  opacity: 0; transform: translateY(20px) scale(0.8);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.building.visible {
+  opacity: 1; transform: translateY(0) scale(1);
+}
+/* Individual buildings - positioned by left% */
+.bld-house1 { left: 5%; width: 28px; height: 24px; background: #e8d5b7; border-radius: 2px 2px 0 0; }
+.bld-house1::before { content: ''; position: absolute; top: -12px; left: -2px; width: 0; height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; border-bottom: 12px solid #c0392b; }
+.bld-house2 { left: 16%; width: 24px; height: 28px; background: #f0e6d3; border-radius: 2px 2px 0 0; }
+.bld-house2::before { content: ''; position: absolute; top: -10px; left: -1px; width: 0; height: 0; border-left: 13px solid transparent; border-right: 13px solid transparent; border-bottom: 10px solid #d35400; }
+.bld-school { left: 27%; width: 48px; height: 32px; background: #f5f0e0; border-radius: 2px 2px 0 0; }
+.bld-school::before { content: ''; position: absolute; top: -8px; left: 16px; width: 16px; height: 8px; background: #8b4513; border-radius: 2px 2px 0 0; }
+.bld-school::after { content: ''; position: absolute; top: 8px; left: 4px; width: 8px; height: 12px; background: #5dade2; border-radius: 1px; box-shadow: 12px 0 0 #5dade2, 24px 0 0 #5dade2, 36px 0 0 #5dade2; }
+.bld-factory { left: 50%; width: 44px; height: 36px; background: #b0bec5; border-radius: 2px 2px 0 0; }
+.bld-factory::before { content: ''; position: absolute; top: -20px; right: 6px; width: 8px; height: 20px; background: #78909c; border-radius: 2px 2px 0 0; }
+.bld-factory::after { content: ''; position: absolute; top: 6px; left: 4px; width: 14px; height: 10px; background: #90a4ae; border-radius: 1px; box-shadow: 18px 0 0 #90a4ae; }
+.bld-bldg1 { left: 70%; width: 28px; height: 52px; background: linear-gradient(180deg, #5dade2, #3498db); border-radius: 3px 3px 0 0; }
+.bld-bldg1::after { content: ''; position: absolute; top: 4px; left: 3px; width: 6px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 1px; box-shadow: 0 8px 0 rgba(255,255,255,0.3), 0 16px 0 rgba(255,255,255,0.3), 0 24px 0 rgba(255,255,255,0.3), 0 32px 0 rgba(255,255,255,0.3), 14px 0 0 rgba(255,255,255,0.3), 14px 8px 0 rgba(255,255,255,0.3), 14px 16px 0 rgba(255,255,255,0.3), 14px 24px 0 rgba(255,255,255,0.3), 14px 32px 0 rgba(255,255,255,0.3); }
+.bld-bldg2 { left: 82%; width: 24px; height: 44px; background: linear-gradient(180deg, #af7ac5, #8e44ad); border-radius: 3px 3px 0 0; }
+.bld-bldg2::after { content: ''; position: absolute; top: 4px; left: 3px; width: 5px; height: 3px; background: rgba(255,255,255,0.25); border-radius: 1px; box-shadow: 0 7px 0 rgba(255,255,255,0.25), 0 14px 0 rgba(255,255,255,0.25), 0 21px 0 rgba(255,255,255,0.25), 0 28px 0 rgba(255,255,255,0.25), 12px 0 0 rgba(255,255,255,0.25), 12px 7px 0 rgba(255,255,255,0.25), 12px 14px 0 rgba(255,255,255,0.25), 12px 21px 0 rgba(255,255,255,0.25), 12px 28px 0 rgba(255,255,255,0.25); }
+.bld-tower { left: 90%; width: 20px; height: 60px; background: linear-gradient(180deg, #f39c12, #e67e22); border-radius: 4px 4px 0 0; }
+.bld-tower::before { content: ''; position: absolute; top: -10px; left: 6px; width: 8px; height: 10px; background: #e74c3c; border-radius: 2px 2px 0 0; }
+
+/* Trees & decorations */
+.tree { position: absolute; bottom: 22px; width: 12px; height: 16px; opacity: 0; transition: opacity 0.5s; }
+.tree.visible { opacity: 1; }
+.tree::before { content: ''; position: absolute; bottom: 0; left: 4px; width: 4px; height: 6px; background: #8B4513; }
+.tree::after { content: ''; position: absolute; top: 0; left: 0; width: 12px; height: 12px; background: #27ae60; border-radius: 50%; }
+.tree-1 { left: 37%; }
+.tree-2 { left: 46%; }
+.tree-3 { left: 66%; }
+.tree-4 { left: 78%; }
+
+/* Sun */
+.city-sun {
+  position: absolute; top: 12px; right: 16px; width: 30px; height: 30px;
+  background: #f59e0b; border-radius: 50%; opacity: 0;
+  box-shadow: 0 0 20px rgba(245,158,11,0.5);
+  transition: opacity 0.8s;
+}
+.city-sun.visible { opacity: 1; }
+
+/* Fireworks */
+.firework {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  opacity: 0; pointer-events: none;
+}
+@keyframes firework-burst {
+  0% { transform: scale(0); opacity: 1; }
+  50% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Perfect glow */
+.city-container.perfect {
+  animation: perfect-glow 2s ease-in-out infinite alternate;
+}
+@keyframes perfect-glow {
+  from { box-shadow: 0 0 20px rgba(56,189,248,0.3); }
+  to { box-shadow: 0 0 40px rgba(56,189,248,0.6), 0 0 60px rgba(245,158,11,0.3); }
+}
+
+/* Construction sign (empty state) */
+.construction-sign {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: #f59e0b; color: #000; padding: 6px 14px; border-radius: 4px;
+  font-size: 12px; font-weight: 700; white-space: nowrap;
+  transition: opacity 0.5s;
+}
+.construction-sign.hidden { opacity: 0; }
+
+/* ===== Quiz Screen ===== */
+#quizScreen { gap: 10px; }
+.quiz-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 4px 0; flex-shrink: 0;
+}
+.quiz-progress { font-size: 14px; color: #94a3b8; }
+.quiz-combo {
+  font-size: 16px; font-weight: 700; color: #f59e0b;
+  transition: transform 0.2s;
+}
+.quiz-combo.pulse { animation: combo-pulse 0.3s ease; }
+@keyframes combo-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+.quiz-score {
+  font-size: 14px; color: #38bdf8; font-weight: 600;
+}
+
+/* Timer bar */
+.timer-bar-wrap {
+  width: 100%; height: 6px; background: #1e293b; border-radius: 3px;
+  overflow: hidden; flex-shrink: 0;
+}
+.timer-bar {
+  height: 100%; background: linear-gradient(90deg, #ef4444, #f59e0b, #22c55e);
+  border-radius: 3px; transition: width 0.1s linear;
+}
+.timer-bar.danger { background: #ef4444; }
+
+/* Category tag */
+.quiz-category {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; flex-shrink: 0;
+  align-self: flex-start;
+}
+.cat-katsudo { background: #164e63; color: #67e8f9; }
+.cat-sdgs { background: #14532d; color: #86efac; }
+.cat-carbon { background: #3b0764; color: #d8b4fe; }
+.cat-ad { background: #7c2d12; color: #fed7aa; }
+
+/* Question */
+.quiz-question {
+  font-size: 18px; font-weight: 700; line-height: 1.5;
+  flex-shrink: 0; min-height: 60px;
+  display: flex; align-items: center;
+}
+
+/* Choices */
+.choices {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  flex: 1; align-content: center;
+}
+.choice-btn {
+  padding: 14px 10px; border: 2px solid #334155; border-radius: 12px;
+  background: #1e293b; color: #fff; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; line-height: 1.3;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; min-height: 56px;
+}
+.choice-btn:active { transform: scale(0.96); }
+.choice-btn.correct {
+  background: #065f46; border-color: #10b981; color: #6ee7b7;
+  animation: correct-flash 0.4s ease;
+}
+@keyframes correct-flash {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.choice-btn.wrong {
+  background: #7f1d1d; border-color: #ef4444; color: #fca5a5;
+  animation: wrong-shake 0.4s ease;
+}
+@keyframes wrong-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.choice-btn.disabled { pointer-events: none; opacity: 0.5; }
+.choice-btn.show-correct { border-color: #10b981; opacity: 1 !important; }
+
+/* Explanation */
+.quiz-explanation {
+  background: #1e293b; border-radius: 10px; padding: 10px 14px;
+  font-size: 13px; line-height: 1.5; color: #cbd5e1;
+  flex-shrink: 0; opacity: 0; max-height: 0; overflow: hidden;
+  transition: opacity 0.3s, max-height 0.3s;
+}
+.quiz-explanation.visible { opacity: 1; max-height: 120px; }
+.quiz-explanation strong { color: #38bdf8; }
+
+/* Points popup */
+.points-popup {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 36px; font-weight: 900; pointer-events: none;
+  opacity: 0; z-index: 100;
+}
+.points-popup.show {
+  animation: points-fly 0.8s ease-out forwards;
+}
+.points-popup.positive { color: #38bdf8; }
+.points-popup.negative { color: #ef4444; }
+@keyframes points-fly {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+  30% { opacity: 1; transform: translate(-50%, -70%) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%, -120%) scale(0.8); }
+}
+
+/* ===== Result Screen ===== */
+#resultScreen {
+  justify-content: flex-start; align-items: center; gap: 16px;
+  overflow-y: auto; padding-top: 20px; padding-bottom: 40px;
+}
+.result-title {
+  font-size: 24px; font-weight: 900; text-align: center;
+}
+.result-rank {
+  font-size: 48px; font-weight: 900; text-align: center;
+  background: linear-gradient(135deg, #f59e0b, #38bdf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.result-score {
+  font-size: 18px; color: #94a3b8; text-align: center;
+}
+.result-score b { color: #fff; font-size: 32px; }
+.result-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%;
+}
+.stat-card {
+  background: #1e293b; border-radius: 10px; padding: 12px;
+  text-align: center;
+}
+.stat-card .stat-value { font-size: 24px; font-weight: 700; color: #38bdf8; }
+.stat-card .stat-label { font-size: 12px; color: #64748b; margin-top: 2px; }
+.btn-retry {
+  width: 100%; max-width: 280px; padding: 14px; border: none; border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #fff; font-size: 16px; font-weight: 700;
+  cursor: pointer; margin-top: 8px;
+}
+.btn-retry:active { transform: scale(0.96); }
+
+/* Confetti */
+.confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; overflow: hidden; }
+.confetti {
+  position: absolute; width: 8px; height: 8px; top: -10px;
+  animation: confetti-fall linear forwards;
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100dvh) rotate(720deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== START SCREEN ===== -->
+<div id="startScreen" class="screen active">
+  <h1>沖縄の街を<span>つくろう</span></h1>
+  <p class="subtitle">琉球セメント 新入社員研修クイズ</p>
+  <div class="city-container" id="startCity">
+    <div class="city-ground"></div>
+    <div class="construction-sign">🚧 工事予定地</div>
+  </div>
+  <input type="text" class="name-input" id="nameInput" placeholder="名前を入力" maxlength="10" autocomplete="off">
+  <button class="btn-start" id="btnStart" disabled>スタート</button>
+</div>
+
+<!-- ===== QUIZ SCREEN ===== -->
+<div id="quizScreen" class="screen">
+  <div class="city-container" id="quizCity">
+    <div class="city-ground"></div>
+    <div class="city-road"></div>
+    <div class="city-sun"></div>
+    <div class="building bld-house1"></div>
+    <div class="building bld-house2"></div>
+    <div class="building bld-school"></div>
+    <div class="tree tree-1"></div>
+    <div class="tree tree-2"></div>
+    <div class="building bld-factory"></div>
+    <div class="tree tree-3"></div>
+    <div class="building bld-bldg1"></div>
+    <div class="tree tree-4"></div>
+    <div class="building bld-bldg2"></div>
+    <div class="building bld-tower"></div>
+    <div class="construction-sign" id="quizSign">🚧 建設中...</div>
+  </div>
+  <div class="quiz-header">
+    <span class="quiz-progress" id="qProgress">Q1 / 20</span>
+    <span class="quiz-combo" id="qCombo"></span>
+    <span class="quiz-score" id="qScore">0 pt</span>
+  </div>
+  <div class="timer-bar-wrap"><div class="timer-bar" id="timerBar"></div></div>
+  <span class="quiz-category" id="qCategory"></span>
+  <div class="quiz-question" id="qText"></div>
+  <div class="choices" id="choices"></div>
+  <div class="quiz-explanation" id="qExplanation"></div>
+</div>
+
+<!-- ===== RESULT SCREEN ===== -->
+<div id="resultScreen" class="screen">
+  <div class="result-title" id="resultTitle"></div>
+  <div class="city-container" id="resultCity">
+    <div class="city-ground"></div>
+    <div class="city-road"></div>
+    <div class="city-sun"></div>
+    <div class="building bld-house1"></div>
+    <div class="building bld-house2"></div>
+    <div class="building bld-school"></div>
+    <div class="tree tree-1"></div>
+    <div class="tree tree-2"></div>
+    <div class="building bld-factory"></div>
+    <div class="tree tree-3"></div>
+    <div class="building bld-bldg1"></div>
+    <div class="tree tree-4"></div>
+    <div class="building bld-bldg2"></div>
+    <div class="building bld-tower"></div>
+  </div>
+  <div class="result-rank" id="resultRank"></div>
+  <div class="result-score" id="resultScore"></div>
+  <div class="result-stats" id="resultStats"></div>
+  <button class="btn-retry" id="btnRetry">もう一度チャレンジ</button>
+</div>
+
+<div class="points-popup" id="pointsPopup"></div>
+<div class="confetti-container" id="confettiContainer"></div>
+
+<script>
+// ===== QUIZ DATA =====
+const QUIZZES = [
+  // --- 小集団活動 (5問) ---
+  {
+    category: 'katsudo', catLabel: '小集団活動',
+    question: '琉球セメントの社内小集団活動の発表大会の名称は？',
+    choices: ['カイゼン甲子園', 'ザ・チャレンジ発表大会', 'QCサミット', '改善フェスタ'],
+    answer: 1,
+    explanation: '「ザ・チャレンジ発表大会」は、QC手法を活用した改善活動を発表する年間イベントです。'
+  },
+  {
+    category: 'katsudo', catLabel: '小集団活動',
+    question: '小集団活動で使われる「QCストーリー」の2つの型は？',
+    choices: ['攻撃型と防御型', '問題解決型と課題達成型', '短期型と長期型', '個人型とチーム型'],
+    answer: 1,
+    explanation: 'QCストーリーには「問題解決型」と「課題達成型」の2つの型があり、テーマに応じて使い分けます。'
+  },
+  {
+    category: 'katsudo', catLabel: '小集団活動',
+    question: '改善効果を示す際に求められる表現方法は？',
+    choices: ['「改善した」と一言で報告', '上司の感想を添える', '数値で比較し金額換算まで実施', 'グラフを1枚添付すればOK'],
+    answer: 2,
+    explanation: '「○○が△%改善し、年間□万円の効果」のように、Before/Afterを数値で比較し金額換算まで行います。'
+  },
+  {
+    category: 'katsudo', catLabel: '小集団活動',
+    question: 'QC7つ道具に含まれないものはどれ？',
+    choices: ['パレート図', '特性要因図', '管理図', 'ガントチャート'],
+    answer: 3,
+    explanation: 'QC7つ道具はパレート図・特性要因図・管理図・ヒストグラム・散布図・チェックシート・層別です。ガントチャートは工程管理ツールです。'
+  },
+  {
+    category: 'katsudo', catLabel: '小集団活動',
+    question: '発表大会のテーマ選定で重視されるポイントは？',
+    choices: ['流行のビジネス用語を使うこと', '経営課題や現場の困りごとに直結していること', 'テーマが斬新で目立つこと', '前年と同じテーマを継続すること'],
+    answer: 1,
+    explanation: 'テーマ選定では経営課題・現場の困りごとに直結していることが最重要です。'
+  },
+  // --- SDGs (5問) ---
+  {
+    category: 'sdgs', catLabel: 'SDGs',
+    question: '琉球セメントで検討中のパーパス案（推奨）に含まれる3つのキーワードは？',
+    choices: ['守る・繋ぐ・育てる', '掘る・焼く・届ける', '活かす・めぐらせる・つくる', '学ぶ・創る・届ける'],
+    answer: 2,
+    explanation: 'パーパス案（推奨）は「沖縄の資源を活かし、めぐらせ、未来をつくる。」で、活かす・めぐらせる・つくるの3ミッションで構成されています。'
+  },
+  {
+    category: 'sdgs', catLabel: 'SDGs',
+    question: '「めぐらせる」ミッションが対応する主な事業は？',
+    choices: ['セメント製造', '資源リサイクル事業・家電リサイクル', '建設コンサルティング', '不動産事業'],
+    answer: 1,
+    explanation: '「めぐらせる」は廃棄物を資源に変え循環させること。資源リサイクル事業・家電リサイクルが該当します。'
+  },
+  {
+    category: 'sdgs', catLabel: 'SDGs',
+    question: '「つくる」ミッションのサステナビリティとの関連は？',
+    choices: ['新商品の開発', '防災インフラの整備・持続可能な街づくり', 'AI技術の導入', '海外市場への進出'],
+    answer: 1,
+    explanation: '台風や塩害に負けない安全な沖縄をつくること。防災インフラの整備と持続可能な街づくりに関連します。'
+  },
+  {
+    category: 'sdgs', catLabel: 'SDGs',
+    question: '琉球セメントの創業の志は？',
+    choices: ['技術で世界を変える', '郷土の資源で郷土をつくる', '沖縄から日本を支える', '島と共に百年企業へ'],
+    answer: 1,
+    explanation: '「郷土の資源で郷土をつくる」が創業の志であり、パーパス案はこの精神を現代に受け継いでいます。'
+  },
+  {
+    category: 'sdgs', catLabel: 'SDGs',
+    question: 'サステナビリティ情報の開示で意識すべき国際基準に含まれないものは？',
+    choices: ['GRI', 'TCFD', 'ISSB', 'GAAP'],
+    answer: 3,
+    explanation: 'GRI・TCFD・ISSBはサステナビリティ開示の国際基準です。GAAPは財務会計の基準であり、サステナビリティ基準ではありません。'
+  },
+  // --- 脱炭素 (5問) ---
+  {
+    category: 'carbon', catLabel: '脱炭素',
+    question: '琉球セメントのリサイクル事業が実現を目指す社会モデルは？',
+    choices: ['高度情報化社会', '循環型社会', 'シェアリングエコノミー', '脱成長社会'],
+    answer: 1,
+    explanation: '廃棄物を資源に変え沖縄の中で循環させる「循環型社会」の実現を目指しています。'
+  },
+  {
+    category: 'carbon', catLabel: '脱炭素',
+    question: '「活かす」ミッションの中核であるセメント事業の特徴は？',
+    choices: ['海外から原料を輸入して製造', '沖縄の大地の恵みを製品に変える（県内資源の有効活用）', '人工素材のみで製造', 'すべて手作業で製造'],
+    answer: 1,
+    explanation: '「活かす」は沖縄の大地の恵み（石灰石等）を暮らしとインフラを支える製品に変えること。地産地消が特徴です。'
+  },
+  {
+    category: 'carbon', catLabel: '脱炭素',
+    question: '琉球セメントが取り組むリサイクル事業に含まれるものは？',
+    choices: ['ペットボトルリサイクルのみ', '家電リサイクルを含む資源リサイクル', '古紙回収のみ', '食品ロス削減のみ'],
+    answer: 1,
+    explanation: '資源リサイクル事業に加え、家電リサイクル事業にも取り組んでいます。'
+  },
+  {
+    category: 'carbon', catLabel: '脱炭素',
+    question: 'サステナビリティ情報で求められるデータの特徴は？',
+    choices: ['イメージ写真が多いほど良い', '定量データ（CO2削減量・地域貢献実績等）で裏付ける', '他社の数値を引用する', '概算値で十分'],
+    answer: 1,
+    explanation: '自社の取り組みは定量データ（CO2削減量・地域貢献実績等）で裏付けることが求められます。'
+  },
+  {
+    category: 'carbon', catLabel: '脱炭素',
+    question: 'セメント業界におけるパーパス策定の現状は？',
+    choices: ['全社が策定済み', 'ほとんどの企業が策定していない', '法律で義務化されている', '海外企業のみ策定'],
+    answer: 1,
+    explanation: '国内セメント業界で「パーパス」を明確に掲げている企業はほぼなく、琉球セメントが策定すれば先進的な取り組みとなります。'
+  },
+  // --- 宣伝広告 (5問) ---
+  {
+    category: 'ad', catLabel: '宣伝広告',
+    question: '琉球セメントのカレンダーに長年採用されているモチーフは？',
+    choices: ['沖縄の風景写真', '女性の琉装画', '首里城のイラスト', '社員の集合写真'],
+    answer: 1,
+    explanation: '当社のカレンダーは長年にわたり女性の琉装画を採用してきました。現在、描き手の確保が課題となっています。'
+  },
+  {
+    category: 'ad', catLabel: '宣伝広告',
+    question: '2026年度上期の広告業務フェーズ1（4〜5月）のテーマは？',
+    choices: ['仕上げる・まとめる', '決める・動かす', '知る・整理する', '売る・広める'],
+    answer: 2,
+    explanation: 'フェーズ1は「知る・整理する」。既存の広告・販促物の棚卸し、他社事例調査、基本方針の策定を行います。'
+  },
+  {
+    category: 'ad', catLabel: '宣伝広告',
+    question: '広告展開の優先順位で最初に取り組むべきものは？',
+    choices: ['CM制作', 'パーパスの社内承認', 'SNS運用開始', '新聞広告の出稿'],
+    answer: 1,
+    explanation: 'パーパスはすべての対外発信の土台となるため、最優先で社内承認を得る必要があります。'
+  },
+  {
+    category: 'ad', catLabel: '宣伝広告',
+    question: '「地域社会（沖縄県民）」に届けたい主なメッセージは？',
+    choices: ['安い価格でセメントを提供', '沖縄を支える企業であるという認知', '海外進出の計画', '株主への配当方針'],
+    answer: 1,
+    explanation: '沖縄県民には「沖縄を支える企業であるという認知」を、主にCMとホームページで届けます。'
+  },
+  {
+    category: 'ad', catLabel: '宣伝広告',
+    question: '9月末までに「ホームページ」で目指す状態は？',
+    choices: ['完全リニューアル済み', '主要ページの更新が完了 or 公開直前', '外部委託先を選定中', '企画書を作成中'],
+    answer: 1,
+    explanation: 'HPはコストが低く早く着手できるため、9月末には主要ページの更新完了または公開直前の状態を目指します。'
+  }
+];
+
+// ===== GAME STATE =====
+let state = {
+  name: '',
+  currentQ: 0,
+  score: 0,
+  combo: 0,
+  maxCombo: 0,
+  correctCount: 0,
+  timeLeft: 0,
+  timerInterval: null,
+  answered: false,
+  shuffledQuizzes: [],
+  maxScore: 0
+};
+
+const TIMER_MAX = 150; // 15 seconds * 10 ticks
+const BASE_POINTS = 1000;
+
+// ===== DOM =====
+const $ = id => document.getElementById(id);
+
+// ===== INIT =====
+const nameInput = $('nameInput');
+const btnStart = $('btnStart');
+
+nameInput.addEventListener('input', () => {
+  btnStart.disabled = nameInput.value.trim() === '';
+});
+
+btnStart.addEventListener('click', startGame);
+$('btnRetry').addEventListener('click', () => {
+  showScreen('startScreen');
+  nameInput.value = '';
+  btnStart.disabled = true;
+  nameInput.focus();
+});
+
+// ===== SCREEN MANAGEMENT =====
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+
+// ===== GAME LOGIC =====
+function startGame() {
+  state.name = nameInput.value.trim();
+  state.currentQ = 0;
+  state.score = 0;
+  state.combo = 0;
+  state.maxCombo = 0;
+  state.correctCount = 0;
+  state.maxScore = 0;
+
+  // Shuffle quizzes
+  state.shuffledQuizzes = [...QUIZZES].sort(() => Math.random() - 0.5);
+
+  // Calculate max possible score
+  for (let i = 0; i < state.shuffledQuizzes.length; i++) {
+    state.maxScore += BASE_POINTS * (i < 1 ? 1 : Math.min(i + 1, state.shuffledQuizzes.length));
+  }
+  // Simplified: maxScore = sum of base * combo(1..20)
+  state.maxScore = 0;
+  for (let c = 1; c <= QUIZZES.length; c++) {
+    state.maxScore += BASE_POINTS * Math.min(c, 5); // combo caps at x5
+  }
+
+  resetCityView('quizCity');
+  showScreen('quizScreen');
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const q = state.shuffledQuizzes[state.currentQ];
+  const total = state.shuffledQuizzes.length;
+
+  $('qProgress').textContent = `Q${state.currentQ + 1} / ${total}`;
+  updateComboDisplay();
+  $('qScore').textContent = `${state.score.toLocaleString()} pt`;
+
+  // Category
+  const catEl = $('qCategory');
+  catEl.textContent = q.catLabel;
+  catEl.className = 'quiz-category cat-' + q.category;
+
+  // Question
+  $('qText').textContent = q.question;
+
+  // Shuffle choices but track correct index
+  const indices = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  const choicesEl = $('choices');
+  choicesEl.innerHTML = '';
+
+  indices.forEach(origIdx => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = q.choices[origIdx];
+    btn.dataset.idx = origIdx;
+    btn.addEventListener('click', () => handleAnswer(origIdx, btn));
+    choicesEl.appendChild(btn);
+  });
+
+  // Hide explanation
+  $('qExplanation').classList.remove('visible');
+
+  // Start timer
+  state.timeLeft = TIMER_MAX;
+  state.answered = false;
+  const timerBar = $('timerBar');
+  timerBar.style.width = '100%';
+  timerBar.classList.remove('danger');
+
+  clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(() => {
+    state.timeLeft--;
+    const pct = (state.timeLeft / TIMER_MAX) * 100;
+    timerBar.style.width = pct + '%';
+    if (pct < 30) timerBar.classList.add('danger');
+
+    if (state.timeLeft <= 0) {
+      clearInterval(state.timerInterval);
+      handleTimeout();
+    }
+  }, 100);
+}
+
+function handleAnswer(chosenIdx, btnEl) {
+  if (state.answered) return;
+  state.answered = true;
+  clearInterval(state.timerInterval);
+
+  const q = state.shuffledQuizzes[state.currentQ];
+  const isCorrect = chosenIdx === q.answer;
+
+  // Disable all buttons
+  document.querySelectorAll('.choice-btn').forEach(b => {
+    b.classList.add('disabled');
+    if (parseInt(b.dataset.idx) === q.answer) {
+      b.classList.add('show-correct');
+    }
+  });
+
+  if (isCorrect) {
+    btnEl.classList.remove('disabled');
+    btnEl.classList.add('correct');
+    state.combo++;
+    if (state.combo > state.maxCombo) state.maxCombo = state.combo;
+    state.correctCount++;
+
+    const timeBonus = Math.round((state.timeLeft / TIMER_MAX) * BASE_POINTS);
+    const comboMultiplier = Math.min(state.combo, 5);
+    const points = timeBonus * comboMultiplier;
+    state.score += points;
+
+    showPointsPopup('+' + points.toLocaleString(), true);
+  } else {
+    btnEl.classList.add('wrong');
+    state.combo = 0;
+    showPointsPopup('MISS', false);
+  }
+
+  updateComboDisplay();
+  $('qScore').textContent = `${state.score.toLocaleString()} pt`;
+
+  // Show explanation
+  $('qExplanation').innerHTML = `<strong>${isCorrect ? '⭕ 正解！' : '❌ 不正解...'}</strong> ${q.explanation}`;
+  $('qExplanation').classList.add('visible');
+
+  // Update city
+  updateCity('quizCity', state.correctCount / state.shuffledQuizzes.length);
+
+  // Next question after delay
+  setTimeout(() => {
+    state.currentQ++;
+    if (state.currentQ < state.shuffledQuizzes.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  }, 2200);
+}
+
+function handleTimeout() {
+  if (state.answered) return;
+  state.answered = true;
+  state.combo = 0;
+
+  const q = state.shuffledQuizzes[state.currentQ];
+  document.querySelectorAll('.choice-btn').forEach(b => {
+    b.classList.add('disabled');
+    if (parseInt(b.dataset.idx) === q.answer) {
+      b.classList.add('show-correct');
+    }
+  });
+
+  showPointsPopup('TIME UP', false);
+  updateComboDisplay();
+
+  $('qExplanation').innerHTML = `<strong>⏰ 時間切れ...</strong> ${q.explanation}`;
+  $('qExplanation').classList.add('visible');
+
+  setTimeout(() => {
+    state.currentQ++;
+    if (state.currentQ < state.shuffledQuizzes.length) {
+      loadQuestion();
+    } else {
+      showResult();
+    }
+  }, 2200);
+}
+
+// ===== CITY RENDERING =====
+function resetCityView(containerId) {
+  const container = $(containerId);
+  container.querySelectorAll('.building, .tree, .city-road, .city-sun').forEach(el => {
+    el.classList.remove('visible');
+  });
+  container.classList.remove('perfect');
+  const sign = container.querySelector('.construction-sign');
+  if (sign) sign.classList.remove('hidden');
+}
+
+function updateCity(containerId, progress) {
+  const container = $(containerId);
+  const buildings = container.querySelectorAll('.building');
+  const trees = container.querySelectorAll('.tree');
+  const road = container.querySelector('.city-road');
+  const sun = container.querySelector('.city-sun');
+  const sign = container.querySelector('.construction-sign');
+
+  // Show buildings progressively
+  const totalElements = buildings.length; // 8 buildings
+  const showCount = Math.floor(progress * totalElements);
+
+  buildings.forEach((b, i) => {
+    if (i < showCount) b.classList.add('visible');
+  });
+
+  // Trees appear at 30%+
+  if (progress >= 0.3) {
+    trees.forEach((t, i) => {
+      if (progress >= 0.3 + i * 0.1) t.classList.add('visible');
+    });
+  }
+
+  // Road at 20%+
+  if (progress >= 0.2 && road) road.classList.add('visible');
+
+  // Sun at 60%+
+  if (progress >= 0.6 && sun) sun.classList.add('visible');
+
+  // Hide construction sign at 40%+
+  if (progress >= 0.4 && sign) sign.classList.add('hidden');
+
+  // Perfect glow at 100%
+  if (progress >= 1) container.classList.add('perfect');
+}
+
+// ===== COMBO DISPLAY =====
+function updateComboDisplay() {
+  const el = $('qCombo');
+  if (state.combo >= 2) {
+    el.textContent = `🔥 x${state.combo}`;
+    el.classList.remove('pulse');
+    void el.offsetWidth;
+    el.classList.add('pulse');
+  } else if (state.combo === 1) {
+    el.textContent = '';
+  } else {
+    el.textContent = '';
+  }
+}
+
+// ===== POINTS POPUP =====
+function showPointsPopup(text, positive) {
+  const el = $('pointsPopup');
+  el.textContent = text;
+  el.className = 'points-popup ' + (positive ? 'positive' : 'negative');
+  void el.offsetWidth;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 800);
+}
+
+// ===== RESULT =====
+function showResult() {
+  const total = state.shuffledQuizzes.length;
+  const pct = state.correctCount / total;
+
+  // Determine rank
+  let rank, title;
+  if (pct === 1) { rank = 'S'; title = '🎉 パーフェクトシティ完成！'; }
+  else if (pct >= 0.8) { rank = 'A'; title = '🏙️ 立派な街が完成！'; }
+  else if (pct >= 0.6) { rank = 'B'; title = '🏘️ 街が形になってきた！'; }
+  else if (pct >= 0.4) { rank = 'C'; title = '🏗️ まだまだ建設中...'; }
+  else { rank = 'D'; title = '🚧 これから発展だ！'; }
+
+  $('resultTitle').textContent = title;
+  $('resultRank').textContent = `RANK ${rank}`;
+  $('resultScore').innerHTML = `<b>${state.score.toLocaleString()}</b> pt`;
+
+  // Stats
+  $('resultStats').innerHTML = `
+    <div class="stat-card"><div class="stat-value">${state.correctCount}/${total}</div><div class="stat-label">正解数</div></div>
+    <div class="stat-card"><div class="stat-value">${Math.round(pct * 100)}%</div><div class="stat-label">正答率</div></div>
+    <div class="stat-card"><div class="stat-value">x${state.maxCombo}</div><div class="stat-label">最大コンボ</div></div>
+    <div class="stat-card"><div class="stat-value">${rank}</div><div class="stat-label">ランク</div></div>
+  `;
+
+  // Build result city
+  resetCityView('resultCity');
+  // Animate city build-up
+  let buildProgress = 0;
+  const buildInterval = setInterval(() => {
+    buildProgress += 0.05;
+    if (buildProgress >= pct) {
+      buildProgress = pct;
+      clearInterval(buildInterval);
+    }
+    updateCity('resultCity', buildProgress);
+  }, 100);
+
+  showScreen('resultScreen');
+
+  // Confetti for A or S rank
+  if (pct >= 0.8) {
+    launchConfetti();
+  }
+}
+
+// ===== CONFETTI =====
+function launchConfetti() {
+  const container = $('confettiContainer');
+  container.innerHTML = '';
+  const colors = ['#f59e0b', '#38bdf8', '#10b981', '#ef4444', '#a855f7', '#ec4899'];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.width = (4 + Math.random() * 6) + 'px';
+    el.style.height = (4 + Math.random() * 6) + 'px';
+    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    el.style.animationDelay = (Math.random() * 1) + 's';
+    container.appendChild(el);
+  }
+  setTimeout(() => container.innerHTML = '', 4000);
+}
+</script>
+</body>
+</html>
