@@ -378,31 +378,7 @@
     .tool-card .tool-name { font-size: 0.6em; font-weight: 700; color: var(--gray1); }
     .tool-card .tool-use { font-size: 0.5em; color: var(--gray3); margin-top: 2px; }
 
-    /* ===== 動画スライド ===== */
-    .video-slide { text-align: center !important; }
-    .video-frame {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 48%;
-      aspect-ratio: 16/9;
-      background: var(--gray1);
-      border-radius: 16px;
-      margin-top: 1em;
-      position: relative;
-      overflow: hidden;
-    }
-    .video-play {
-      width: 60px; height: 60px;
-      background: rgba(255,255,255,0.9);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2em;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    .video-caption {
-      font-size: 0.55em; color: var(--gray3); margin-top: 0.4em;
-    }
+    /* (動画スライドは削除済み) */
 
     /* ===== QRスライド ===== */
     .qr-slide { text-align: center !important; }
@@ -817,15 +793,10 @@
     <!-- ========================================= -->
     <!-- 10. 実際の発表を見てみよう -->
     <!-- ========================================= -->
-    <section class="video-slide">
-      <div class="section-label">小集団活動</div>
-      <h2>実際の発表を見てみよう</h2>
-      <p style="text-align: center;">「<span class="hl-blue">琉人</span>」チームの発表を視聴します</p>
-
-      <div class="video-frame">
-        <div class="video-play">▶</div>
-      </div>
-      <p class="video-caption">2025年度 ザ・チャレンジ発表大会より</p>
+    <section class="section-break">
+      <div style="font-size: 3em; margin-bottom: 0.3em;">🎬</div>
+      <h1 style="font-size: 1.5em;">実際の発表を<br><span class="hl-blue">見てみよう</span></h1>
+      <p>2025年度 ザ・チャレンジ発表大会<br>「琉人」チームの発表を視聴します</p>
     </section>
 
     <!-- ========================================= -->
@@ -873,34 +844,20 @@
       <h2>琉球セメントのSDGsへの取り組み</h2>
       <p>創業の志<span class="hl-green">「郷土の資源で郷土をつくる」</span>に基づき、様々な取り組みを行っています。</p>
 
-      <div style="display: flex; gap: 14px; margin-top: 0.4em; align-items: flex-start;">
-        <!-- 左: カード2列 -->
-        <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-          <div class="card card-green" style="padding: 8px 10px;">
-            <span class="card-icon" style="font-size: 1em; margin-bottom: 2px;">🏅</span>
-            <div class="card-title" style="font-size: 0.6em;">SDGsパートナー</div>
-            <p style="font-size: 0.5em;">沖縄県認定のSDGs推進パートナー制度に登録</p>
-          </div>
-          <div class="card card-green" style="padding: 8px 10px;">
-            <span class="card-icon" style="font-size: 1em; margin-bottom: 2px;">🪸</span>
-            <div class="card-title" style="font-size: 0.6em;">サンゴプロジェクト</div>
-            <p style="font-size: 0.5em;">OISTと連携。セメント1袋2円を寄付しサンゴ養殖に貢献</p>
-          </div>
-          <div class="card card-green" style="padding: 8px 10px;">
-            <span class="card-icon" style="font-size: 1em; margin-bottom: 2px;">♻️</span>
-            <div class="card-title" style="font-size: 0.6em;">リサイクル事業</div>
-            <p style="font-size: 0.5em;">廃棄物を資源に変え循環。家電リサイクルも展開</p>
-          </div>
-          <div class="card card-green" style="padding: 8px 10px;">
-            <span class="card-icon" style="font-size: 1em; margin-bottom: 2px;">⛏️</span>
-            <div class="card-title" style="font-size: 0.6em;">地産地消モデル</div>
-            <p style="font-size: 0.5em;">沖縄の石灰石で地元のインフラを支える</p>
-          </div>
+      <div style="display: flex; gap: 16px; margin-top: 0.4em; align-items: flex-start;">
+        <!-- 左: テキストリスト -->
+        <div style="flex: 0 0 55%;">
+          <ul style="margin: 0;">
+            <li style="font-size: 0.62em; margin-bottom: 6px;"><strong style="color: var(--green);">おきなわSDGsパートナー</strong><br><span class="muted" style="font-size: 0.9em;">沖縄県認定の推進パートナー制度に登録（R7.4〜R10.3）</span></li>
+            <li style="font-size: 0.62em; margin-bottom: 6px;"><strong style="color: var(--green);">OISTサンゴプロジェクト</strong><br><span class="muted" style="font-size: 0.9em;">袋物セメント1袋につき2円を寄付。サンゴ養殖・海洋保護に貢献</span></li>
+            <li style="font-size: 0.62em; margin-bottom: 6px;"><strong style="color: var(--green);">資源リサイクル・家電リサイクル</strong><br><span class="muted" style="font-size: 0.9em;">廃棄物を資源に変え、沖縄の中で循環させる</span></li>
+            <li style="font-size: 0.62em;"><strong style="color: var(--green);">地産地消モデル</strong><br><span class="muted" style="font-size: 0.9em;">沖縄の石灰石で地元のインフラを支える</span></li>
+          </ul>
         </div>
-        <!-- 右: 登録証画像 -->
-        <div style="flex-shrink: 0; width: 180px;">
-          <div style="background: var(--white); border: 2px solid var(--green); border-radius: 10px; padding: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <img src="sdgs-partner.png" alt="おきなわSDGsパートナー登録証" style="width: 100%; max-height: 320px; object-fit: contain; border-radius: 6px; display: block;" />
+        <!-- 右: 登録証画像（大きく） -->
+        <div style="flex: 0 0 40%;">
+          <div style="background: var(--white); border: 2px solid var(--green); border-radius: 10px; padding: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+            <img src="sdgs-partner.png" alt="おきなわSDGsパートナー登録証" style="width: 100%; max-height: 380px; object-fit: contain; border-radius: 6px; display: block;" />
           </div>
         </div>
       </div>
