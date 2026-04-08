@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>経営企画課の仕事を知ろう - 新入社員研修</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+
+  <style>
+    /* ===== カラー変数 ===== */
+    :root {
+      --blue:    #2563eb;
+      --blue-lt: #dbeafe;
+      --blue-md: #93c5fd;
+      --indigo:  #4f46e5;
+      --green:   #16a34a;
+      --green-lt:#dcfce7;
+      --orange:  #ea580c;
+      --orange-lt:#ffedd5;
+      --red:     #dc2626;
+      --red-lt:  #fee2e2;
+      --purple:  #7c3aed;
+      --purple-lt:#ede9fe;
+      --teal:    #0d9488;
+      --teal-lt: #ccfbf1;
+      --gray1:   #0f172a;
+      --gray2:   #334155;
+      --gray3:   #64748b;
+      --gray4:   #cbd5e1;
+      --gray5:   #f1f5f9;
+      --white:   #ffffff;
+      --border:  #e2e8f0;
+    }
+
+    /* ===== ベース ===== */
+    .reveal-viewport { background: #f8fafc; }
+
+    .reveal .slides section {
+      text-align: left;
+      font-family: 'Hiragino Sans', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: inherit;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      color: var(--gray1);
+    }
+    .reveal h1 { font-size: 2.1em; font-weight: 800; }
+    .reveal h2 { font-size: 1.4em; font-weight: 700; color: var(--gray1); margin-bottom: 0.5em; }
+    .reveal h3 { font-size: 1em;   font-weight: 700; color: var(--blue); }
+
+    .reveal p, .reveal li {
+      font-size: 0.82em;
+      line-height: 1.8;
+      color: var(--gray2);
+    }
+
+    .reveal ul { list-style: none; padding-left: 0; }
+    .reveal ul li { padding-left: 1.2em; position: relative; }
+    .reveal ul li::before {
+      content: "";
+      position: absolute; left: 0; top: 0.65em;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    /* ===== タイトルスライド ===== */
+    .title-slide { text-align: center !important; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.52em;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-lt);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1em;
+    }
+
+    .title-sub {
+      font-size: 0.62em;
+      color: var(--gray3);
+      margin-top: 0.8em;
+      line-height: 1.6;
+    }
+
+    .divider-line {
+      width: 56px; height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--indigo));
+      border-radius: 2px;
+      margin: 0.8em auto;
+    }
+
+    /* ===== セクションヘッダー ===== */
+    .section-label {
+      display: inline-block;
+      font-size: 0.48em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-left: 3px solid var(--blue);
+      padding-left: 8px;
+      margin-bottom: 0.4em;
+    }
+    .section-label-green { color: var(--green); border-left-color: var(--green); }
+    .section-label-orange { color: var(--orange); border-left-color: var(--orange); }
+    .section-label-purple { color: var(--purple); border-left-color: var(--purple); }
+    .section-label-teal { color: var(--teal); border-left-color: var(--teal); }
+
+    /* ===== カード ===== */
+    .card-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0.8em; }
+    .card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 0.8em; }
+    .card-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-top: 0.8em; }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .card-accent { border-top: 3px solid var(--blue); }
+    .card-green { border-top: 3px solid var(--green); }
+    .card-orange { border-top: 3px solid var(--orange); }
+    .card-purple { border-top: 3px solid var(--purple); }
+    .card-teal { border-top: 3px solid var(--teal); }
+    .card-red { border-top: 3px solid var(--red); }
+    .card .card-icon { font-size: 1.5em; margin-bottom: 8px; display: block; }
+    .card .card-title { font-size: 0.78em; font-weight: 700; color: var(--gray1); margin-bottom: 6px; }
+    .card p { font-size: 0.68em; color: var(--gray3); margin: 0; line-height: 1.6; }
+
+    /* ===== ステップ ===== */
+    .steps { display: flex; flex-direction: column; gap: 10px; margin-top: 0.8em; }
+    .step {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: 50%;
+      font-weight: 800; font-size: 0.78em;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-num-green { background: var(--green); }
+    .step-num-orange { background: var(--orange); }
+    .step-body .step-title { font-size: 0.78em; font-weight: 700; color: var(--gray1); }
+    .step-body p { font-size: 0.68em; color: var(--gray3); margin: 3px 0 0; }
+
+    /* ===== テーブル ===== */
+    .reveal table { font-size: 0.7em; border-collapse: collapse; width: 100%; }
+    .reveal table th {
+      background: var(--gray1); color: var(--white);
+      padding: 10px 14px; text-align: left;
+    }
+    .reveal table td { padding: 9px 14px; color: var(--gray2); border-bottom: 1px solid var(--border); }
+    .reveal table tr:nth-child(even) td { background: var(--gray5); }
+
+    /* ===== バッジ ===== */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px; border-radius: 20px;
+      font-size: 0.6em; font-weight: 700;
+      vertical-align: middle; margin-right: 6px;
+    }
+    .badge-blue   { background: var(--blue-lt);   color: var(--blue); }
+    .badge-green  { background: var(--green-lt);  color: var(--green); }
+    .badge-orange { background: var(--orange-lt); color: var(--orange); }
+    .badge-red    { background: var(--red-lt);    color: var(--red); }
+    .badge-purple { background: var(--purple-lt); color: var(--purple); }
+    .badge-new    { background: #fef3c7; color: #b45309; }
+
+    /* ===== 図解: フローダイアグラム ===== */
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-top: 1em;
+      flex-wrap: nowrap;
+    }
+    .flow-box {
+      background: var(--white);
+      border: 2px solid var(--blue);
+      border-radius: 10px;
+      padding: 10px 16px;
+      text-align: center;
+      min-width: 110px;
+    }
+    .flow-box .ficon { font-size: 1.4em; display: block; margin-bottom: 4px; }
+    .flow-box .flabel { font-size: 0.62em; font-weight: 700; color: var(--gray1); }
+    .flow-box .fdesc { font-size: 0.55em; color: var(--gray3); margin-top: 3px; }
+    .flow-arrow {
+      font-size: 1.4em; color: var(--blue-md);
+      flex-shrink: 0; margin: 0 6px;
+      line-height: 1;
+    }
+    .flow-box.highlight-box {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+    .flow-box.highlight-box .flabel { color: var(--white); }
+    .flow-box.highlight-box .fdesc  { color: #bfdbfe; }
+
+    /* ===== 図解: 比較ブロック ===== */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin-top: 0.9em;
+    }
+    .compare-col {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+    .compare-col.good { border-color: var(--blue); border-width: 2px; }
+    .compare-col .col-title {
+      font-size: 0.72em; font-weight: 700;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-col .col-title.bad  { color: var(--gray3); }
+    .compare-col .col-title.good { color: var(--blue); }
+    .compare-col ul li { font-size: 0.66em; color: var(--gray3); }
+    .compare-col.good ul li { color: var(--gray2); }
+    .compare-vs {
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 12px;
+      font-size: 0.65em; font-weight: 800; color: var(--gray4);
+    }
+
+    /* ===== 図解: アーキテクチャ図 ===== */
+    .arch {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 0.8em;
+    }
+    .arch-layer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .arch-layer .layer-icon { font-size: 1.3em; flex-shrink: 0; }
+    .arch-layer .layer-label { font-size: 0.72em; font-weight: 700; color: var(--gray1); min-width: 130px; }
+    .arch-layer .layer-items {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .arch-layer .layer-tag {
+      font-size: 0.58em; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+      background: var(--gray5); color: var(--gray2);
+      border: 1px solid var(--border);
+    }
+    .arch-layer.layer-blue { border-left: 4px solid var(--blue); }
+    .arch-layer.layer-green { border-left: 4px solid var(--green); }
+    .arch-layer.layer-orange { border-left: 4px solid var(--orange); }
+    .arch-layer.layer-purple { border-left: 4px solid var(--purple); }
+    .arch-layer.layer-teal { border-left: 4px solid var(--teal); }
+
+    /* ===== ハイライトテキスト ===== */
+    .hl-blue   { color: var(--blue);   font-weight: 700; }
+    .hl-green  { color: var(--green);  font-weight: 700; }
+    .hl-orange { color: var(--orange); font-weight: 700; }
+    .hl-red    { color: var(--red);    font-weight: 700; }
+    .hl-purple { color: var(--purple); font-weight: 700; }
+    .hl-teal   { color: var(--teal);   font-weight: 700; }
+    .muted     { color: var(--gray3); }
+
+    /* ===== スライド番号 ===== */
+    .reveal .slide-number {
+      background: transparent; color: var(--gray4); font-size: 0.5em;
+    }
+
+    /* ===== まとめカード ===== */
+    .summary-list { display: flex; flex-direction: column; gap: 10px; margin-top: 0.8em; }
+    .summary-item {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 18px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .summary-item .s-num {
+      flex-shrink: 0;
+      font-size: 1em; font-weight: 800; color: var(--blue);
+      min-width: 24px;
+    }
+    .summary-item p { font-size: 0.74em; color: var(--gray2); margin: 0; line-height: 1.5; }
+
+    /* ===== セクション区切り ===== */
+    .section-break { text-align: center !important; }
+    .section-break h1 { font-size: 1.8em; }
+    .section-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 56px; height: 56px; border-radius: 50%;
+      font-size: 1.4em; font-weight: 800; color: var(--white);
+      margin-bottom: 0.6em;
+    }
+    .section-num-blue { background: var(--blue); }
+    .section-num-green { background: var(--green); }
+    .section-num-purple { background: var(--purple); }
+    .section-num-orange { background: var(--orange); }
+
+    /* ===== サイクル図 ===== */
+    .cycle-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 1em;
+    }
+    .cycle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 520px;
+    }
+    .cycle-item {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .cycle-item .cycle-letter {
+      font-size: 1.4em; font-weight: 900; margin-bottom: 4px;
+    }
+    .cycle-item .cycle-label { font-size: 0.72em; font-weight: 700; color: var(--gray1); }
+    .cycle-item .cycle-desc { font-size: 0.6em; color: var(--gray3); margin-top: 4px; }
+    .cycle-p { border-color: var(--blue); }
+    .cycle-p .cycle-letter { color: var(--blue); }
+    .cycle-d { border-color: var(--green); }
+    .cycle-d .cycle-letter { color: var(--green); }
+    .cycle-c { border-color: var(--orange); }
+    .cycle-c .cycle-letter { color: var(--orange); }
+    .cycle-a { border-color: var(--red); }
+    .cycle-a .cycle-letter { color: var(--red); }
+
+    /* ===== 7つ道具グリッド ===== */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 0.8em;
+    }
+    .tool-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .tool-card .tool-icon { font-size: 1.8em; display: block; margin-bottom: 6px; }
+    .tool-card .tool-name { font-size: 0.68em; font-weight: 700; color: var(--gray1); }
+    .tool-card .tool-use { font-size: 0.55em; color: var(--gray3); margin-top: 3px; }
+
+    /* ===== 動画スライド ===== */
+    .video-slide { text-align: center !important; }
+    .video-frame {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 70%;
+      aspect-ratio: 16/9;
+      background: var(--gray1);
+      border-radius: 16px;
+      margin-top: 1em;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-play {
+      width: 80px; height: 80px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .video-caption {
+      font-size: 0.6em; color: var(--gray3); margin-top: 0.8em;
+    }
+
+    /* ===== QRスライド ===== */
+    .qr-slide { text-align: center !important; }
+    .qr-wrap {
+      display: inline-block;
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 0.8em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .qr-wrap img { display: block; width: 240px; height: 240px; }
+    .qr-url {
+      font-size: 0.55em; color: var(--gray3);
+      margin-top: 0.6em;
+      word-break: break-all;
+    }
+
+    /* ===== インフォボックス ===== */
+    .info-box {
+      background: var(--blue-lt);
+      border-radius: 10px;
+      padding: 12px 18px;
+      margin-top: 0.8em;
+    }
+    .info-box p {
+      margin: 0; font-size: 0.72em; color: var(--blue);
+    }
+    .info-box-green { background: var(--green-lt); }
+    .info-box-green p { color: var(--green); }
+    .info-box-orange { background: var(--orange-lt); }
+    .info-box-orange p { color: var(--orange); }
+
+    /* ===== 5型カードグリッド ===== */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 0.6em;
+    }
+    .type-grid .row2 {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- ========================================= -->
+    <!-- 1. 表紙 -->
+    <!-- ========================================= -->
+    <section class="title-slide">
+      <div class="eyebrow">新入社員研修 2026</div>
+      <h1>経営企画課の<br><span class="hl-blue">仕事を知ろう</span></h1>
+      <div class="divider-line"></div>
+      <p class="title-sub">琉球セメント株式会社 総務部 経営企画課</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 2. 経営企画課の業務範囲 -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">Overview</div>
+      <h2>経営企画課の業務範囲</h2>
+      <p>経営企画課は会社全体を<span class="hl-blue">横断的に支える</span>部署です。今日はこのうち<strong>4つのテーマ</strong>を紹介します。</p>
+
+      <div class="arch">
+        <div class="arch-layer layer-blue">
+          <span class="layer-icon">📊</span>
+          <span class="layer-label">経営管理</span>
+          <div class="layer-items">
+            <span class="layer-tag">予算管理</span>
+            <span class="layer-tag">中期経営計画</span>
+            <span class="layer-tag">予実管理</span>
+            <span class="layer-tag">子会社管理</span>
+          </div>
+        </div>
+        <div class="arch-layer layer-green" style="border-left-color: var(--blue); background: var(--blue-lt);">
+          <span class="layer-icon">🏭</span>
+          <span class="layer-label" style="color: var(--blue);">小集団活動</span>
+          <div class="layer-items">
+            <span class="layer-tag" style="background: var(--blue); color: #fff; border-color: var(--blue);">ザ・チャレンジ発表大会</span>
+            <span class="layer-tag" style="background: var(--blue); color: #fff; border-color: var(--blue);">QC事務局</span>
+          </div>
+        </div>
+        <div class="arch-layer layer-green" style="border-left-color: var(--green); background: var(--green-lt);">
+          <span class="layer-icon">🌱</span>
+          <span class="layer-label" style="color: var(--green);">SDGs・脱炭素</span>
+          <div class="layer-items">
+            <span class="layer-tag" style="background: var(--green); color: #fff; border-color: var(--green);">サステナビリティ</span>
+            <span class="layer-tag" style="background: var(--green); color: #fff; border-color: var(--green);">循環型社会</span>
+          </div>
+        </div>
+        <div class="arch-layer layer-purple" style="background: var(--purple-lt);">
+          <span class="layer-icon">📣</span>
+          <span class="layer-label" style="color: var(--purple);">宣伝広告</span>
+          <div class="layer-items">
+            <span class="layer-tag" style="background: var(--purple); color: #fff; border-color: var(--purple);">HP</span>
+            <span class="layer-tag" style="background: var(--purple); color: #fff; border-color: var(--purple);">会社案内</span>
+            <span class="layer-tag" style="background: var(--purple); color: #fff; border-color: var(--purple);">CM</span>
+            <span class="layer-tag" style="background: var(--purple); color: #fff; border-color: var(--purple);">カレンダー</span>
+          </div>
+        </div>
+        <div class="arch-layer layer-orange">
+          <span class="layer-icon">📋</span>
+          <span class="layer-label">コーポレート</span>
+          <div class="layer-items">
+            <span class="layer-tag">有価証券報告書</span>
+            <span class="layer-tag">稟議書審査</span>
+            <span class="layer-tag">社内資料</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 3. 今日のテーマ -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">Agenda</div>
+      <h2>今日のテーマ</h2>
+      <p>経営企画課が担当する<span class="hl-blue">4つの領域</span>を学びます。最後にクイズゲームで理解度チェック！</p>
+
+      <div class="card-grid-2">
+        <div class="card card-accent">
+          <span class="card-icon">🏭</span>
+          <div class="card-title">1. 小集団活動</div>
+          <p>QC活動・ザ・チャレンジ発表大会の仕組みと進め方</p>
+        </div>
+        <div class="card card-green">
+          <span class="card-icon">🌱</span>
+          <div class="card-title">2. SDGs</div>
+          <p>SDGsパートナー・サンゴプロジェクト・リサイクル</p>
+        </div>
+        <div class="card card-teal">
+          <span class="card-icon">🌿</span>
+          <div class="card-title">3. カーボンニュートラル</div>
+          <p>CN推進委員会と2050年CN実現に向けた取り組み</p>
+        </div>
+        <div class="card card-purple">
+          <span class="card-icon">📣</span>
+          <div class="card-title">4. 宣伝広告</div>
+          <p>HP・会社案内・CM・カレンダーの企画と広報戦略</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- セクション区切り: 小集団活動 -->
+    <!-- ========================================= -->
+    <section class="section-break">
+      <div class="section-num section-num-blue">1</div>
+      <h1>小集団活動</h1>
+      <p>QC活動とザ・チャレンジ発表大会</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 4. 小集団活動とは -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">小集団活動</div>
+      <h2>小集団活動とは</h2>
+      <p>職場のメンバーが<span class="hl-blue">少人数のグループ（サークル）</span>を作り、自分たちで課題を見つけ、改善に取り組む活動です。</p>
+
+      <div class="card-grid-3">
+        <div class="card card-accent">
+          <span class="card-icon">🎯</span>
+          <div class="card-title">目的</div>
+          <p>職場の問題を自分たちの手で解決し、業務品質・効率を向上させる</p>
+        </div>
+        <div class="card card-accent">
+          <span class="card-icon">👥</span>
+          <div class="card-title">メンバー</div>
+          <p>同じ職場の3〜10名程度でサークルを結成</p>
+        </div>
+        <div class="card card-accent">
+          <span class="card-icon">📅</span>
+          <div class="card-title">期間</div>
+          <p>1年間で計画→実行→発表まで完結</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <p><strong>ポイント：</strong>「上から言われてやる」のではなく、<span class="hl-blue">現場の声から改善を生む</span>ボトムアップの活動です。</p>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 5. ザ・チャレンジ発表大会 -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">小集団活動</div>
+      <h2>ザ・チャレンジ発表大会とは</h2>
+      <p>1年間の活動成果を全社に向けて発表するイベントです。</p>
+
+      <div class="flow">
+        <div class="flow-box">
+          <span class="ficon">📝</span>
+          <div class="flabel">テーマ選定</div>
+          <div class="fdesc">年度初め</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <span class="ficon">📊</span>
+          <div class="flabel">活動計画</div>
+          <div class="fdesc">年間計画提出</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box highlight-box">
+          <span class="ficon">🔄</span>
+          <div class="flabel">PDCA実行</div>
+          <div class="fdesc">毎月リーダー会</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <span class="ficon">📋</span>
+          <div class="flabel">発表資料作成</div>
+          <div class="fdesc">プレゼン準備</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <span class="ficon">🏆</span>
+          <div class="flabel">発表大会</div>
+          <div class="fdesc">審査・表彰</div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <p><strong>経営企画課の役割：</strong>事務局として参加サークル支援・審査基準整備・大会運営を担当します。</p>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 6. 活動の5つの型 -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">小集団活動</div>
+      <h2>活動の5つの型</h2>
+      <p>従来の3つの型に加え、<span class="hl-blue">2つの新しい型</span>があります。</p>
+
+      <div class="type-grid">
+        <div class="card card-accent">
+          <div class="card-title">問題解決型</div>
+          <p>目に見えている問題に対して、要因解析を行って解決するアプローチ</p>
+        </div>
+        <div class="card card-accent">
+          <div class="card-title">課題達成型</div>
+          <p>新しい業務や、従来のやり方の変更だけでは不十分な場合の取り組み</p>
+        </div>
+        <div class="card card-accent">
+          <div class="card-title">施策実行型</div>
+          <p>対策のポイントが見えており、目標達成の対策がほぼ見えている場合</p>
+        </div>
+        <div class="row2">
+          <div class="card card-orange" style="border-top-color: #b45309;">
+            <span class="badge badge-new">NEW</span>
+            <div class="card-title" style="margin-top: 6px;">提案型</div>
+            <p>部署をまたぐ問題について、従来の手法に囚われない<strong>ボトムアップ視点</strong>からの提案</p>
+          </div>
+          <div class="card card-orange" style="border-top-color: #b45309;">
+            <span class="badge badge-new">NEW</span>
+            <div class="card-title" style="margin-top: 6px;">体験活動</div>
+            <p>業務上の取り組みや部署特有の業務を<strong>全社的に共有</strong>する発表</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 7. PDCAサイクルと活動の進め方 -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">小集団活動</div>
+      <h2>PDCAサイクルと活動の進め方</h2>
+
+      <div class="compare">
+        <div class="compare-col">
+          <div class="col-title bad">一般的なQC活動</div>
+          <ul>
+            <li>決められたステップに厳密に従う</li>
+            <li>発表資料も固定フォーマット</li>
+            <li>型にはめる必要がある</li>
+          </ul>
+        </div>
+        <div class="compare-vs">→</div>
+        <div class="compare-col good">
+          <div class="col-title good">ザ・チャレンジ発表大会</div>
+          <ul>
+            <li><span class="hl-blue">PDCAサイクルに従えばOK</span></li>
+            <li>プレゼン内容に合った手順で進行可能</li>
+            <li>発表資料の構成も自由</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cycle-wrap">
+        <div class="cycle">
+          <div class="cycle-item cycle-p">
+            <div class="cycle-letter">P</div>
+            <div class="cycle-label">Plan（計画）</div>
+            <div class="cycle-desc">テーマ選定・目標設定・計画立案</div>
+          </div>
+          <div class="cycle-item cycle-d">
+            <div class="cycle-letter">D</div>
+            <div class="cycle-label">Do（実行）</div>
+            <div class="cycle-desc">計画に基づいた改善の実行</div>
+          </div>
+          <div class="cycle-item cycle-c">
+            <div class="cycle-letter">C</div>
+            <div class="cycle-label">Check（確認）</div>
+            <div class="cycle-desc">効果の測定・目標との比較</div>
+          </div>
+          <div class="cycle-item cycle-a">
+            <div class="cycle-letter">A</div>
+            <div class="cycle-label">Act（改善）</div>
+            <div class="cycle-desc">標準化・次のサイクルへ</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 8. QC7つ道具 -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">小集団活動</div>
+      <h2>QC7つ道具</h2>
+      <p>データを分析し、問題の原因を特定するための<span class="hl-blue">基本ツール</span>です。</p>
+
+      <div class="tool-grid">
+        <div class="tool-card">
+          <span class="tool-icon">📊</span>
+          <div class="tool-name">パレート図</div>
+          <div class="tool-use">重要な問題を特定</div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-icon">🐟</span>
+          <div class="tool-name">特性要因図</div>
+          <div class="tool-use">原因を網羅的に整理</div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-icon">📈</span>
+          <div class="tool-name">管理図</div>
+          <div class="tool-use">工程の安定性を監視</div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-icon">📉</span>
+          <div class="tool-name">ヒストグラム</div>
+          <div class="tool-use">データのばらつきを可視化</div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-icon">🔵</span>
+          <div class="tool-name">散布図</div>
+          <div class="tool-use">2つの要因の関係を分析</div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-icon">✅</span>
+          <div class="tool-name">チェックシート</div>
+          <div class="tool-use">データを漏れなく収集</div>
+        </div>
+        <div class="tool-card">
+          <span class="tool-icon">📋</span>
+          <div class="tool-name">層別</div>
+          <div class="tool-use">データをグループ分け</div>
+        </div>
+        <div class="tool-card" style="border: 2px dashed var(--blue-md);">
+          <span class="tool-icon">💡</span>
+          <div class="tool-name" style="color: var(--blue);">活用のコツ</div>
+          <div class="tool-use">目的に合った道具を選ぶ</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 9. 改善効果の見せ方 -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">小集団活動</div>
+      <h2>改善効果の見せ方</h2>
+      <p>発表で<span class="hl-blue">説得力のある効果</span>を示すために押さえるべき3つのポイント。</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Before / After を数値で比較</div>
+            <p>「改善した」ではなく「不良率が12%→3%に低減」のように定量的に</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">金額換算まで実施</div>
+            <p>「年間○万円のコスト削減」「△時間の工数削減 × 時間単価 = □円」</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">現状分析では定量データを必ず使用</div>
+            <p>QC7つ道具で収集・分析したデータをグラフ・図表で可視化</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box-orange" style="background: var(--orange-lt); border-radius: 10px; padding: 12px 18px; margin-top: 0.8em;">
+        <p style="margin: 0; font-size: 0.72em; color: var(--orange);">
+          <strong>NG例：</strong>「改善した」「良くなった」→ <strong>OK例：</strong>「○○が△%改善し、年間□万円の効果」
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 10. 実際の発表を見てみよう -->
+    <!-- ========================================= -->
+    <section class="video-slide">
+      <div class="section-label">小集団活動</div>
+      <h2>実際の発表を見てみよう</h2>
+      <p style="text-align: center;">「<span class="hl-blue">琉人</span>」チームの発表を視聴します</p>
+
+      <div class="video-frame">
+        <div class="video-play">▶</div>
+      </div>
+      <p class="video-caption">2025年度 ザ・チャレンジ発表大会より</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- セクション区切り: SDGs -->
+    <!-- ========================================= -->
+    <section class="section-break">
+      <div class="section-num section-num-green">2</div>
+      <h1>SDGs</h1>
+      <p>持続可能な開発目標と琉球セメントの取り組み</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- SDGsとは -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label section-label-green">SDGs</div>
+      <h2>SDGsとは</h2>
+      <p>SDGs（Sustainable Development Goals）は、2015年に国連で採択された<span class="hl-green">2030年までに達成を目指す17の目標</span>です。</p>
+
+      <div class="card-grid-2">
+        <div class="card card-green">
+          <span class="card-icon">🌍</span>
+          <div class="card-title">世界共通の目標</div>
+          <p>貧困・環境・平和など、地球規模の課題を解決するための17のゴールと169のターゲット</p>
+        </div>
+        <div class="card card-green">
+          <span class="card-icon">🏢</span>
+          <div class="card-title">企業に求められること</div>
+          <p>本業を通じた社会課題の解決、環境負荷の低減、地域社会への貢献が求められている</p>
+        </div>
+      </div>
+
+      <div class="info-box-green" style="background: var(--green-lt); border-radius: 10px; padding: 12px 18px; margin-top: 0.8em;">
+        <p style="margin: 0; font-size: 0.72em; color: var(--green);">
+          <strong>ポイント：</strong>SDGsは「やっておくといいこと」ではなく、企業の<span class="hl-green">経営戦略そのもの</span>に組み込む時代です。
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 琉球セメントのSDGs取り組み -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label section-label-green">SDGs</div>
+      <h2>琉球セメントのSDGsへの取り組み</h2>
+      <p>創業の志<span class="hl-green">「郷土の資源で郷土をつくる」</span>に基づき、様々な取り組みを行っています。</p>
+
+      <div class="card-grid-2">
+        <div class="card card-green">
+          <span class="card-icon">🏅</span>
+          <div class="card-title">おきなわSDGsパートナー</div>
+          <p>沖縄県が認定するSDGs推進パートナー制度に登録（令和7年4月〜令和10年3月）</p>
+        </div>
+        <div class="card card-green">
+          <span class="card-icon">🪸</span>
+          <div class="card-title">OISTサンゴプロジェクト</div>
+          <p>沖縄科学技術大学院大学と連携。袋物セメント1袋につき2円を寄付し、サンゴの養殖・CO2削減・海洋保護に貢献</p>
+        </div>
+        <div class="card card-green">
+          <span class="card-icon">♻️</span>
+          <div class="card-title">資源リサイクル事業</div>
+          <p>廃棄物を資源に変え沖縄の中で循環。資源リサイクル・家電リサイクル事業を展開</p>
+        </div>
+        <div class="card card-green">
+          <span class="card-icon">⛏️</span>
+          <div class="card-title">地産地消モデル</div>
+          <p>沖縄の石灰石を活用し、地元の資源で地元のインフラを支える</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; margin-top: 0.6em; align-items: center;">
+        <div style="flex-shrink: 0; width: 130px; background: var(--white); border: 2px solid var(--green); border-radius: 10px; padding: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <img src="sdgs-partner.png" alt="おきなわSDGsパートナー登録証" style="width: 100%; border-radius: 6px; display: block;" />
+        </div>
+        <div style="flex: 1; background: var(--green-lt); border-radius: 10px; padding: 10px 16px;">
+          <p style="margin: 0; font-size: 0.68em; color: var(--green); font-weight: 700;">セメント袋にもOISTサンゴプロジェクトのロゴを掲載し、取り組みをPR</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- セクション区切り: カーボンニュートラル -->
+    <!-- ========================================= -->
+    <section class="section-break">
+      <div class="section-num section-num-teal" style="background: var(--teal);">CN</div>
+      <h1>カーボンニュートラル</h1>
+      <p>2050年CN実現に向けた琉球セメントの挑戦</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- カーボンニュートラルとは -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label section-label-teal">カーボンニュートラル</div>
+      <h2>カーボンニュートラルとは</h2>
+      <p>CO2などの温室効果ガスの<span class="hl-teal">排出量と吸収量を差し引きゼロ</span>にすること。日本は2050年までの達成を宣言しています。</p>
+
+      <div class="card-grid-2">
+        <div class="card card-teal">
+          <span class="card-icon">🏭</span>
+          <div class="card-title">セメント業界の課題</div>
+          <p>セメント製造はCO2排出が多い業種。原料由来が約60%、エネルギー由来が約40%を占める</p>
+        </div>
+        <div class="card card-teal">
+          <span class="card-icon">🎯</span>
+          <div class="card-title">2030年 業界中間ターゲット</div>
+          <p>焼成工程の非化石比率28%、CO2排出量15%削減（対2013年度）が業界目安</p>
+        </div>
+      </div>
+
+      <div class="info-box" style="background: var(--teal-lt); margin-top: 0.8em;">
+        <p style="margin: 0; font-size: 0.72em; color: var(--teal);">
+          <strong>キーワード：</strong>化石燃料（石炭・重油）の代わりに廃棄物や再生可能エネルギーを使うことが鍵です。
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 当社のカーボンニュートラル推進体制と取り組み -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label section-label-teal">カーボンニュートラル</div>
+      <h2>当社のCN推進体制と取り組み</h2>
+      <p><span class="hl-teal">カーボンニュートラル推進委員会</span>が中心となり、全社的に推進しています。</p>
+
+      <div class="arch">
+        <div class="arch-layer layer-teal">
+          <span class="layer-icon">👔</span>
+          <span class="layer-label">CN推進委員会</span>
+          <div class="layer-items">
+            <span class="layer-tag">委員長：専務取締役</span>
+            <span class="layer-tag">委員：各部長級</span>
+            <span class="layer-tag" style="background: var(--teal); color: #fff; border-color: var(--teal);">事務局：経営企画課</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-grid-2" style="margin-top: 0.6em;">
+        <div class="card card-teal" style="padding: 14px 16px;">
+          <div class="card-title">2030年 当社ターゲット</div>
+          <div style="display: flex; gap: 10px; margin-top: 8px;">
+            <div style="flex: 1; background: var(--teal-lt); border-radius: 8px; padding: 10px; text-align: center;">
+              <p style="font-size: 1.4em; font-weight: 900; color: var(--teal); margin: 0;">41.4%</p>
+              <p style="font-size: 0.58em; color: var(--gray3); margin: 2px 0 0;">化石エネルギー代替率</p>
+              <p style="font-size: 0.5em; color: var(--gray3); margin: 0;">（業界目標 28%）</p>
+            </div>
+            <div style="flex: 1; background: var(--teal-lt); border-radius: 8px; padding: 10px; text-align: center;">
+              <p style="font-size: 1.4em; font-weight: 900; color: var(--teal); margin: 0;">15.8%</p>
+              <p style="font-size: 0.58em; color: var(--gray3); margin: 2px 0 0;">CO2削減率（対2015年度）</p>
+              <p style="font-size: 0.5em; color: var(--gray3); margin: 0;">（業界目標 15%）</p>
+            </div>
+          </div>
+        </div>
+        <div class="card card-teal" style="padding: 14px 16px;">
+          <div class="card-title">主な取り組み</div>
+          <ul style="margin-top: 6px;">
+            <li style="font-size: 0.62em;">廃棄物・有価物の受入拡大（熱エネ系代替）</li>
+            <li style="font-size: 0.62em;">LNG（液化天然ガス）転換を5社で共同検討</li>
+            <li style="font-size: 0.62em;">鉱山での陸上風力発電の風況調査</li>
+            <li style="font-size: 0.62em;">CN関連設備に2030年までに50億円以上を投資</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- セクション区切り: 宣伝広告 -->
+    <!-- ========================================= -->
+    <section class="section-break">
+      <div class="section-num section-num-purple">4</div>
+      <h1>宣伝広告</h1>
+      <p>誰に、何を、どう届けるか</p>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 広告・協賛活動の全体像 -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label section-label-purple">宣伝広告</div>
+      <h2>広告・協賛活動の全体像</h2>
+      <p>琉球セメントは<span class="hl-purple">スポーツ・地域イベント・メディア</span>など幅広い分野で協賛・広告活動を行っています。</p>
+
+      <div class="card-grid-3">
+        <div class="card card-purple">
+          <span class="card-icon">🏃</span>
+          <div class="card-title">スポーツ</div>
+          <ul style="margin-top: 4px;">
+            <li style="font-size: 0.62em;">各地のマラソン・トライアスロン大会</li>
+            <li style="font-size: 0.62em;">ツール・ド・おきなわ（自転車）</li>
+            <li style="font-size: 0.62em;">LA TIDA 女子ハンドボール</li>
+            <li style="font-size: 0.62em;">プロ野球オープン戦・学童野球</li>
+          </ul>
+        </div>
+        <div class="card card-purple">
+          <span class="card-icon">🎆</span>
+          <div class="card-title">祭り・地域イベント</div>
+          <ul style="margin-top: 4px;">
+            <li style="font-size: 0.62em;">浦添てだこまつり（特別協賛）</li>
+            <li style="font-size: 0.62em;">海洋博公園花火大会</li>
+            <li style="font-size: 0.62em;">首里城復興祭・名護まつり</li>
+            <li style="font-size: 0.62em;">産業まつり・離島フェア 他</li>
+          </ul>
+        </div>
+        <div class="card card-purple">
+          <span class="card-icon">📺</span>
+          <div class="card-title">メディア・広告</div>
+          <ul style="margin-top: 4px;">
+            <li style="font-size: 0.62em;">年賀スポットCM</li>
+            <li style="font-size: 0.62em;">新聞の年賀広告</li>
+            <li style="font-size: 0.62em;">業界誌（セメント年鑑 他）</li>
+            <li style="font-size: 0.62em;">住宅新聞 特集記事</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-grid-2" style="margin-top: 0.6em;">
+        <div class="card card-purple">
+          <span class="card-icon">🎭</span>
+          <div class="card-title">文化・社会貢献</div>
+          <ul style="margin-top: 4px;">
+            <li style="font-size: 0.62em;">オペラ「沖縄物語」</li>
+            <li style="font-size: 0.62em;">森と湖に親しむ旬間</li>
+          </ul>
+        </div>
+        <div class="card card-purple">
+          <span class="card-icon">📦</span>
+          <div class="card-title">販促物・制作物</div>
+          <ul style="margin-top: 4px;">
+            <li style="font-size: 0.62em;">琉装画カレンダー</li>
+            <li style="font-size: 0.62em;">会社案内・HP・クリアファイル</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 広告活動のポイント -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label section-label-purple">宣伝広告</div>
+      <h2>経営企画課が担う広告業務</h2>
+      <p>経営企画課はこれらの<span class="hl-purple">協賛・広告の稟議・管理</span>を担当しています。</p>
+
+      <div class="card-grid-2">
+        <div class="card card-accent" style="border-top-color: var(--purple);">
+          <span class="card-icon">📋</span>
+          <div class="card-title">協賛の稟議・管理</div>
+          <p>年間を通じて各種協賛の稟議書を作成・管理。67期だけでも26件以上の協賛案件を処理</p>
+        </div>
+        <div class="card card-accent" style="border-top-color: var(--purple);">
+          <span class="card-icon">🎯</span>
+          <div class="card-title">広告・販促物の企画</div>
+          <p>HP・会社案内・CM・カレンダーなど対外的な制作物の企画立案と進行管理</p>
+        </div>
+      </div>
+
+      <div class="info-box" style="background: var(--purple-lt); margin-top: 0.8em;">
+        <p style="margin: 0; font-size: 0.72em; color: var(--purple);">
+          <strong>ポイント：</strong>広告・協賛活動は地域とのつながりを深め、「沖縄を支える企業」としての認知を高める重要な役割を果たしています。
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 16. まとめ -->
+    <!-- ========================================= -->
+    <section>
+      <div class="section-label">Summary</div>
+      <h2>まとめ</h2>
+      <p>経営企画課が担う<span class="hl-blue">4つの領域</span>を学びました。</p>
+
+      <div class="summary-list">
+        <div class="summary-item">
+          <div class="s-num" style="color: var(--blue);">1</div>
+          <p><strong>小集団活動</strong> — 5つの活動型（提案型・体験活動が新設）、PDCAサイクルに基づく柔軟な活動へ</p>
+        </div>
+        <div class="summary-item">
+          <div class="s-num" style="color: var(--green);">2</div>
+          <p><strong>SDGs</strong> — おきなわSDGsパートナー登録、OISTサンゴプロジェクト、リサイクル事業で社会に貢献</p>
+        </div>
+        <div class="summary-item">
+          <div class="s-num" style="color: var(--teal);">3</div>
+          <p><strong>カーボンニュートラル</strong> — CN推進委員会が中心。2030年に化石エネ代替率41.4%、CO2削減15.8%を目標</p>
+        </div>
+        <div class="summary-item">
+          <div class="s-num" style="color: var(--purple);">4</div>
+          <p><strong>宣伝広告</strong> — ターゲット別に最適な媒体とメッセージで企業価値を伝える</p>
+        </div>
+      </div>
+
+      <div class="info-box" style="margin-top: 1em;">
+        <p><strong>覚えておいてほしいこと：</strong>これらはすべて<span class="hl-blue">「沖縄の未来をつくる」</span>という共通の目的でつながっています。</p>
+      </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- 17. クイズに挑戦！ -->
+    <!-- ========================================= -->
+    <section class="qr-slide">
+      <h1>🎮 クイズに挑戦！</h1>
+      <p>スマホで QR コードを読み取って<br><span class="hl-blue">「沖縄の街をつくろう」</span>に挑戦しよう！</p>
+
+      <div class="qr-wrap">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://s1998yoshiki-art.github.io/training-quiz-game/" alt="QRコード" />
+      </div>
+      <p class="qr-url">https://s1998yoshiki-art.github.io/training-quiz-game/</p>
+
+      <div class="info-box" style="margin-top: 0.8em; display: inline-block;">
+        <p style="margin: 0;"><strong>ルール：</strong>全20問 ／ 連続正解でコンボ倍率UP ／ スコアに応じて街が成長！</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: true,
+    width: 1280,
+    height: 720,
+    margin: 0.08,
+    transition: 'slide',
+    transitionSpeed: 'default'
+  });
+</script>
+</body>
+</html>
