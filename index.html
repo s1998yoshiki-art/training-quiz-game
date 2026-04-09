@@ -386,24 +386,24 @@ const QUIZZES = [
   },
   {
     category: 'katsudo', catLabel: '小集団活動',
-    question: 'ザ・チャレンジ発表大会の活動の型に「新しく」加わったものはどれ？',
-    choices: ['問題解決型', '施策実行型', '提案型', '課題達成型'],
-    answer: 2,
-    explanation: '従来の3型（問題解決型・課題達成型・施策実行型）に加え、「提案型」と「体験活動」が新しく加わりました。'
-  },
-  {
-    category: 'katsudo', catLabel: '小集団活動',
-    question: 'ザ・チャレンジ発表大会では、一般的なQC活動と違いどのような進め方が認められている？',
-    choices: ['決められたステップに厳密に従う', 'PDCAサイクルに従えば自由な手順でOK', '上司の指示通りに進める', '発表資料は固定フォーマットのみ'],
+    question: '小集団活動は何人くらいのグループで行う？',
+    choices: ['1〜2名', '3〜10名', '20名以上', '部署全員'],
     answer: 1,
-    explanation: '一般的なQC活動は固定ステップですが、ザ・チャレンジ発表大会ではPDCAサイクルに従えば自由な手順・構成で進められます。'
+    explanation: '同じ職場の3〜10名程度でサークルを結成し、自分たちで課題を見つけて改善に取り組みます。'
   },
   {
     category: 'katsudo', catLabel: '小集団活動',
-    question: 'QC7つ道具に含まれないものはどれ？',
-    choices: ['パレート図', '特性要因図', 'ガントチャート', 'チェックシート'],
+    question: 'PDCAの「C」は何の頭文字？',
+    choices: ['Challenge', 'Change', 'Check', 'Create'],
     answer: 2,
-    explanation: 'QC7つ道具はパレート図・特性要因図・管理図・ヒストグラム・散布図・チェックシート・層別です。ガントチャートは工程管理ツールです。'
+    explanation: 'PDCAはPlan（計画）・Do（実行）・Check（確認）・Act（改善）の頭文字です。'
+  },
+  {
+    category: 'katsudo', catLabel: '小集団活動',
+    question: '小集団活動の活動期間は？',
+    choices: ['1ヶ月', '半年', '1年間', '3年間'],
+    answer: 2,
+    explanation: '1年間で計画→実行→発表まで完結します。'
   },
   {
     category: 'katsudo', catLabel: '小集団活動',
@@ -429,17 +429,17 @@ const QUIZZES = [
   },
   {
     category: 'sdgs', catLabel: 'SDGs',
-    question: 'OISTサンゴプロジェクトへの寄付方法は？',
-    choices: ['毎年定額100万円を寄付', '袋物セメント1袋につき2円を寄付', '売上の1%を寄付', '社員のボランティアのみ'],
+    question: 'OISTサンゴプロジェクトと連携しているのはどの大学？',
+    choices: ['琉球大学', '沖縄科学技術大学院大学', '名桜大学', '沖縄国際大学'],
     answer: 1,
-    explanation: '袋物セメント25kg1袋につき2円をOISTサンゴプロジェクトに寄付し、サンゴの養殖・CO2削減に貢献しています。'
+    explanation: 'OIST（沖縄科学技術大学院大学）が主体のサンゴプロジェクトと連携し、サンゴの養殖・海洋保護に貢献しています。'
   },
   {
     category: 'sdgs', catLabel: 'SDGs',
-    question: '琉球セメントの創業の志は？',
+    question: '琉球セメントの企業理念は？',
     choices: ['技術で世界を変える', '郷土の資源で郷土をつくる', '沖縄から日本を支える', '島と共に百年企業へ'],
     answer: 1,
-    explanation: '「郷土の資源で郷土をつくる」が創業の志であり、SDGsの理念と通じる精神です。'
+    explanation: '「郷土の資源で郷土をつくる」が琉球セメントの企業理念であり、SDGsの理念と通じる精神です。'
   },
   {
     category: 'sdgs', catLabel: 'SDGs',
@@ -458,10 +458,10 @@ const QUIZZES = [
   },
   {
     category: 'carbon', catLabel: 'CN',
-    question: '琉球セメントのカーボンニュートラル推進委員会の事務局はどこ？',
-    choices: ['生産部', '経営企画課', '環境事業部', '総務課'],
-    answer: 1,
-    explanation: 'CN推進委員会の事務局は経営企画課が担当しています。委員長は専務取締役です。'
+    question: '琉球セメントの社長の名前は？',
+    choices: ['喜久里 忍', '喜久里 悟', '喜久里 誠', '喜久里 守'],
+    answer: 0,
+    explanation: '琉球セメントの代表取締役社長は喜久里 忍（きくざと しのぶ）です。'
   },
   {
     category: 'carbon', catLabel: 'CN',
@@ -479,25 +479,25 @@ const QUIZZES = [
   },
   {
     category: 'carbon', catLabel: 'CN',
-    question: 'セメント製造工程からのCO2排出で、原料由来が占める割合は？',
-    choices: ['約20%', '約40%', '約60%', '約80%'],
-    answer: 2,
-    explanation: 'セメント製造のCO2排出は原料由来が約60%、エネルギー由来が約40%を占めます。'
+    question: 'CN実現に向けて2030年までに計画している設備投資額は？',
+    choices: ['5億円以上', '10億円以上', '30億円以上', '50億円以上'],
+    answer: 3,
+    explanation: 'カーボンニュートラル関連設備に2030年までに50億円以上の投資を計画しています。'
   },
   // --- 宣伝広告 (5問) ---
   {
     category: 'ad', catLabel: '宣伝広告',
-    question: '琉球セメントが「特別協賛」しているお祭りは？',
-    choices: ['那覇大綱挽', '浦添てだこまつり', '首里城復興祭', '名護まつり'],
+    question: '琉球セメントが毎年放送している広告は？',
+    choices: ['夏のCM', '年賀スポットCM', 'ラジオCM', 'YouTube広告'],
     answer: 1,
-    explanation: '浦添てだこまつりには「特別協賛」として関わっています。その他にも多数の祭りに協賛しています。'
+    explanation: '毎年お正月に年賀スポットCMを放送しています。'
   },
   {
     category: 'ad', catLabel: '宣伝広告',
-    question: '琉球セメントの広告・協賛で「スポーツ」に分類されないものは？',
-    choices: ['ツール・ド・おきなわ', '伊平屋ムーンライトマラソン', '離島フェア', 'LA TIDA女子ハンドボール'],
-    answer: 2,
-    explanation: '離島フェアは「祭り・地域イベント」の分類です。スポーツにはマラソン・トライアスロン・自転車・野球・ハンドボールなどがあります。'
+    question: '琉球セメントが協賛している自転車レースの名前は？',
+    choices: ['ツール・ド・フランス', 'ツール・ド・おきなわ', '沖縄サイクリング大会', '美ら島グランプリ'],
+    answer: 1,
+    explanation: '沖縄で開催される「ツール・ド・おきなわ」に協賛しています。'
   },
   {
     category: 'ad', catLabel: '宣伝広告',
@@ -508,10 +508,10 @@ const QUIZZES = [
   },
   {
     category: 'ad', catLabel: '宣伝広告',
-    question: '広告・協賛活動の稟議管理を担当しているのは？',
-    choices: ['営業部', '経営企画課', '広報部', '総務課'],
+    question: '経営企画課の課長の名前は？',
+    choices: ['大城 克也', '大城 功也', '大城 和也', '大城 達也'],
     answer: 1,
-    explanation: '経営企画課が広告・協賛の稟議・管理を担当しています。67期だけでも26件以上の協賛案件を処理しています。'
+    explanation: '経営企画課の課長は大城 功也です。「克也」ではなく「功也」なので間違えないように！'
   },
   {
     category: 'ad', catLabel: '宣伝広告',
